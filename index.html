@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Gopal Bhusal — GIS and Remote Sensing Enthusiast, Spatial Researcher, Physicist."/>
+<title>Gopal Bhusal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: #0d0d0b;
+  color: #e8e5df;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.4rem 4rem;
+  background: rgba(13,13,11,0.95);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.nav-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; color: #e8e5df; text-decoration: none;
+}
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(232,229,223,0.5); text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover { color: #6dbd6d; }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.hamburger span { display: block; width: 22px; height: 1.5px; background: #e8e5df; }
+
+/* HERO */
+#hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 8rem 4rem 6rem;
+  background: #111110;
+}
+.hero-eyebrow {
+  font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+  color: #6dbd6d; margin-bottom: 1.8rem;
+  display: flex; align-items: center; gap: 0.9rem;
+}
+.hero-eyebrow::before {
+  content: ''; display: inline-block;
+  width: 28px; height: 1px; background: #6dbd6d;
+}
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  font-weight: 300; line-height: 1.03; color: #e8e5df; margin-bottom: 2rem;
+}
+h1 em { font-style: italic; color: #6dbd6d; }
+.hero-bio {
+  font-size: 1rem; line-height: 1.9;
+  color: rgba(232,229,223,0.6); max-width: 540px; margin-bottom: 2.8rem;
+}
+.hero-bio strong { color: #e8e5df; font-weight: 400; }
+.hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn {
+  display: inline-block; font-size: 0.72rem; letter-spacing: 0.14em;
+  text-transform: uppercase; text-decoration: none;
+  padding: 0.85rem 2rem; transition: all 0.25s;
+  border: none; font-family: 'Outfit', sans-serif; cursor: pointer;
+}
+.btn-primary { background: #3d5a3e; color: #e8e5df; }
+.btn-primary:hover { background: #6dbd6d; color: #0d0d0b; }
+.btn-outline { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: rgba(232,229,223,0.6); }
+.btn-outline:hover { border-color: #6dbd6d; color: #6dbd6d; }
+
+/* SECTIONS */
+section { padding: 7rem 4rem; }
+.eyebrow {
+  font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase;
+  color: #6dbd6d; margin-bottom: 3.5rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.eyebrow::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.08); }
+h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300; line-height: 1.15; margin-bottom: 1rem;
+}
+h2 em { font-style: italic; color: #6dbd6d; }
+
+/* ABOUT */
+#about { background: #0d0d0b; }
+.about-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 6rem; align-items: start; max-width: 1100px; }
+.about-left p { font-size: 0.97rem; line-height: 1.95; color: rgba(232,229,223,0.6); margin-bottom: 1.4rem; }
+.about-left p strong { color: #e8e5df; font-weight: 400; }
+.skills-label { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(232,229,223,0.25); margin-bottom: 1rem; margin-top: 2rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.tag {
+  font-size: 0.72rem; padding: 0.3rem 0.85rem;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(232,229,223,0.5);
+  background: rgba(255,255,255,0.02);
+  transition: all 0.2s;
+}
+.tag:hover { border-color: #6dbd6d; color: #6dbd6d; }
+
+/* INFO PANEL */
+.info-panel { background: #171715; border: 1px solid rgba(255,255,255,0.08); padding: 2.4rem; }
+.info-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.85rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 0.85rem;
+}
+.info-row:last-child { border-bottom: none; }
+.info-key { font-size: 0.63rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(232,229,223,0.25); }
+.info-val { color: #e8e5df; }
+.info-val a { color: #6dbd6d; text-decoration: none; }
+.info-val a:hover { text-decoration: underline; }
+
+/* PROJECTS */
+#projects { background: #111110; }
+.projects-list { max-width: 1100px; }
+.project-item {
+  display: grid; grid-template-columns: 64px 1fr auto;
+  gap: 2.5rem; align-items: start;
+  padding: 2.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.project-item:first-of-type { border-top: 1px solid rgba(255,255,255,0.08); }
+.proj-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem; font-weight: 300;
+  color: rgba(255,255,255,0.08); line-height: 1; padding-top: 0.2rem;
+}
+.proj-tags { display: flex; gap: 0.4rem; margin-bottom: 0.7rem; flex-wrap: wrap; }
+.proj-tag {
+  font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: #6dbd6d; border: 1px solid rgba(109,189,109,0.2); padding: 0.15rem 0.55rem;
+}
+h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem; font-weight: 400; color: #e8e5df;
+  margin-bottom: 0.5rem; line-height: 1.3;
+}
+.proj-desc { font-size: 0.88rem; line-height: 1.8; color: rgba(232,229,223,0.55); max-width: 560px; margin-bottom: 0.9rem; }
+.proj-techs { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.tech { font-size: 0.62rem; letter-spacing: 0.07em; color: rgba(232,229,223,0.25); }
+.tech::after { content: ' ·'; }
+.tech:last-child::after { content: ''; }
+.proj-link {
+  font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(232,229,223,0.5); text-decoration: none; white-space: nowrap;
+  padding: 0.55rem 1.1rem; border: 1px solid rgba(255,255,255,0.1);
+  transition: all 0.2s; display: inline-block;
+}
+.proj-link:hover { border-color: #6dbd6d; color: #6dbd6d; }
+
+/* EXPERIENCE */
+#experience { background: #0d0d0b; }
+.exp-grid { max-width: 950px; }
+.exp-item {
+  display: grid; grid-template-columns: 160px 1fr;
+  gap: 3rem; padding: 2.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.exp-item:first-of-type { border-top: 1px solid rgba(255,255,255,0.08); }
+.exp-period { font-size: 0.7rem; letter-spacing: 0.1em; color: rgba(232,229,223,0.25); padding-top: 0.35rem; line-height: 1.8; }
+.exp-current {
+  display: inline-block; font-size: 0.58rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: #6dbd6d;
+  border: 1px solid rgba(109,189,109,0.3); padding: 0.15rem 0.5rem; margin-bottom: 0.5rem;
+}
+.exp-role { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; color: #e8e5df; margin-bottom: 0.2rem; }
+.exp-org { font-size: 0.75rem; letter-spacing: 0.1em; color: #6dbd6d; text-transform: uppercase; margin-bottom: 0.9rem; }
+.exp-desc { font-size: 0.88rem; line-height: 1.85; color: rgba(232,229,223,0.55); }
+.exp-desc ul { padding-left: 1.2rem; margin-top: 0.5rem; }
+.exp-desc li { margin-bottom: 0.4rem; }
+
+/* EDUCATION */
+#education { background: #111110; }
+.edu-grid { max-width: 900px; }
+.edu-item {
+  display: grid; grid-template-columns: 160px 1fr;
+  gap: 3rem; padding: 2.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.edu-item:first-of-type { border-top: 1px solid rgba(255,255,255,0.08); }
+.edu-year { font-size: 0.7rem; letter-spacing: 0.1em; color: rgba(232,229,223,0.25); padding-top: 0.3rem; line-height: 1.8; }
+.edu-degree { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 400; color: #e8e5df; margin-bottom: 0.2rem; }
+.edu-school { font-size: 0.75rem; letter-spacing: 0.1em; color: #6dbd6d; text-transform: uppercase; margin-bottom: 0.8rem; }
+.courses-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(232,229,223,0.25); margin-top: 1rem; margin-bottom: 0.6rem; }
+
+/* PUBLICATION */
+#publication { background: #0d0d0b; }
+.pub-box { max-width: 800px; background: #171715; border: 1px solid rgba(255,255,255,0.08); padding: 2.5rem; }
+.pub-tag {
+  display: inline-block; font-size: 0.6rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: #c8a96e;
+  border: 1px solid rgba(200,169,110,0.25); padding: 0.2rem 0.7rem; margin-bottom: 1.2rem;
+}
+.pub-title { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 400; color: #e8e5df; line-height: 1.5; margin-bottom: 0.8rem; }
+.pub-authors { font-size: 0.82rem; color: rgba(232,229,223,0.55); line-height: 1.7; }
+.pub-journal { font-size: 0.78rem; color: #6dbd6d; margin-top: 0.6rem; font-style: italic; }
+
+/* BLOG */
+#blog { background: #111110; }
+.blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; max-width: 1100px; background: rgba(255,255,255,0.08); }
+.blog-card { background: #111110; padding: 2.5rem; transition: background 0.2s; }
+.blog-card:hover { background: #171715; }
+.blog-date { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(232,229,223,0.25); margin-bottom: 1rem; }
+.blog-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; color: #e8e5df; line-height: 1.4; margin-bottom: 0.8rem; }
+.blog-excerpt { font-size: 0.84rem; line-height: 1.8; color: rgba(232,229,223,0.55); margin-bottom: 1.5rem; }
+.blog-read { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: #6dbd6d; text-decoration: none; }
+.blog-read:hover { text-decoration: underline; }
+
+/* REFERENCES */
+#references { background: #0d0d0b; }
+.ref-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; max-width: 1100px; background: rgba(255,255,255,0.08); }
+.ref-card { background: #0d0d0b; padding: 2.5rem; transition: background 0.2s; }
+.ref-card:hover { background: #171715; }
+.ref-name { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 400; color: #e8e5df; margin-bottom: 0.3rem; }
+.ref-title { font-size: 0.75rem; letter-spacing: 0.08em; color: #6dbd6d; text-transform: uppercase; margin-bottom: 0.2rem; }
+.ref-org { font-size: 0.82rem; color: rgba(232,229,223,0.5); margin-bottom: 1rem; }
+.ref-contacts { display: flex; flex-direction: column; gap: 0.4rem; }
+.ref-contact { font-size: 0.82rem; color: rgba(232,229,223,0.5); text-decoration: none; transition: color 0.2s; }
+.ref-contact:hover { color: #6dbd6d; }
+
+/* CONTACT */
+#contact { background: #111110; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 6rem; align-items: start; max-width: 1100px; }
+.contact-left p { font-size: 0.97rem; line-height: 1.85; color: rgba(232,229,223,0.55); margin-bottom: 2.5rem; }
+.soc-links { display: flex; flex-direction: column; }
+.soc-link {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  text-decoration: none; color: rgba(232,229,223,0.5); font-size: 0.85rem; transition: all 0.2s;
+}
+.soc-link:first-child { border-top: 1px solid rgba(255,255,255,0.07); }
+.soc-link:hover { color: #e8e5df; padding-left: 0.4rem; }
+.contact-form-wrap { background: #171715; border: 1px solid rgba(255,255,255,0.08); padding: 2.5rem; }
+.form-label { display: block; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(232,229,223,0.3); margin-bottom: 0.5rem; }
+.form-row { margin-bottom: 1.4rem; }
+.form-input, .form-textarea {
+  width: 100%; background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1); color: #e8e5df;
+  padding: 0.8rem 1rem; font-family: 'Outfit', sans-serif; font-size: 0.9rem;
+  font-weight: 300; outline: none; transition: border-color 0.2s; border-radius: 0;
+}
+.form-input::placeholder, .form-textarea::placeholder { color: rgba(232,229,223,0.2); }
+.form-input:focus, .form-textarea:focus { border-color: #6dbd6d; }
+.form-textarea { resize: vertical; min-height: 120px; }
+.btn-send {
+  width: 100%; background: #3d5a3e; color: #e8e5df; border: none;
+  padding: 0.9rem; font-family: 'Outfit', sans-serif; font-size: 0.72rem;
+  letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: all 0.25s;
+}
+.btn-send:hover { background: #6dbd6d; color: #0d0d0b; }
+.form-success { display: none; text-align: center; padding: 2.5rem; color: #6dbd6d; font-size: 0.9rem; }
+
+/* FOOTER */
+footer {
+  background: #080808; padding: 1.8rem 4rem;
+  display: flex; justify-content: space-between; align-items: center;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+footer p { font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(232,229,223,0.2); }
+footer a { color: rgba(232,229,223,0.2); text-decoration: none; transition: color 0.2s; margin-left: 1.5rem; }
+footer a:hover { color: #6dbd6d; }
+
+/* MOBILE */
+@media (max-width: 860px) {
+  nav { padding: 1.2rem 2rem; }
+  .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: #111110; padding: 2rem; border-bottom: 1px solid rgba(255,255,255,0.08); gap: 1.5rem; }
+  .nav-links.open { display: flex; }
+  .hamburger { display: flex; }
+  #hero, section { padding-left: 2rem; padding-right: 2rem; }
+  .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .project-item { grid-template-columns: 1fr; gap: 0.8rem; }
+  .exp-item, .edu-item { grid-template-columns: 1fr; gap: 0.4rem; }
+  .blog-grid, .ref-grid { grid-template-columns: 1fr; gap: 1px; }
+  footer { flex-direction: column; gap: 0.8rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-name" href="#hero">Gopal Bhusal</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#blog">Writing</a></li>
+    <li><a href="#references">References</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-eyebrow">GIS · Remote Sensing · Spatial Research · Physics</div>
+  <h1>Gopal<br/><em>Bhusal</em></h1>
+  <p class="hero-bio">
+    A <strong>GIS &amp; Remote Sensing enthusiast</strong> who loves turning spatial data into meaningful insights — passionate about environmental research, satellite imagery, and using geospatial science to understand and protect our changing world.<br/><br/>
+    MS in Geographic Information Science &nbsp;·&nbsp; MS in Physics
+  </p>
+  <div class="hero-ctas">
+    <a class="btn btn-primary" href="#projects">View My Work</a>
+    <a class="btn btn-outline" href="#contact">Get in Touch</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="eyebrow">01 — About Me</div>
+  <div class="about-grid">
+    <div class="about-left">
+      <h2>Spatial Analyst,<br/><em>Physicist</em> &amp;<br/>GIS Professional</h2><br/>
+      <p>I'm <strong>Gopal Bhusal</strong>, a GIS &amp; Remote Sensing enthusiast with a deep passion for environmental research and spatial science. I hold an <strong>MS in Geographic Information Science</strong> from Saint Louis University and an <strong>MS in Physics</strong> from Tribhuvan University — a combination that lets me approach geospatial problems with both technical rigor and scientific curiosity.</p>
+      <p>I love working with satellite imagery, LiDAR point clouds, and spatial datasets to create maps and reports that tell a story. From processing raw LiDAR data to build precise 3D point clouds, running QA/QC workflows, and performing spatial analysis in ArcGIS Pro, to developing geodatabases that organize and visualize field-collected data — I enjoy every step of turning raw data into actionable insights.</p>
+      <p>My background spans environmental modeling, atmospheric science, hydrological research, and remote sensing — always driven by the goal of using geospatial tools to better understand and protect our changing planet.</p>
+      <div class="skills-label">Tools &amp; Technologies</div>
+      <div class="tags">
+        <span class="tag">ArcGIS Pro</span>
+        <span class="tag">ArcGIS Online</span>
+        <span class="tag">QGIS</span>
+        <span class="tag">Python</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">SQL / PostGIS</span>
+        <span class="tag">Google Earth Engine</span>
+        <span class="tag">ENVI</span>
+        <span class="tag">SNAP</span>
+        <span class="tag">LiDAR</span>
+        <span class="tag">SAR / InSAR</span>
+        <span class="tag">RTK GPS</span>
+        <span class="tag">FileMaker</span>
+        <span class="tag">Leaflet.js</span>
+        <span class="tag">ADCP</span>
+      </div>
+    </div>
+    <div>
+      <div class="info-panel">
+        <div class="info-row">
+          <span class="info-key">Status</span>
+          <span class="info-val">Open to Opportunities</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">Location</span>
+          <span class="info-val">San Francisco, CA</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">Current Role</span>
+          <span class="info-val">GIS Technician</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">Employer</span>
+          <span class="info-val">Sally Swanson Architects</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">Email</span>
+          <span class="info-val"><a href="mailto:bhusalgopal89@gmail.com">bhusalgopal89@gmail.com</a></span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">Phone</span>
+          <span class="info-val">(314) 333-1694</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">GitHub</span>
+          <span class="info-val"><a href="https://github.com/Everestgopal" target="_blank">Everestgopal</a></span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">LinkedIn</span>
+          <span class="info-val"><a href="https://linkedin.com/in/gopalbhusal89" target="_blank">gopalbhusal89</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="eyebrow">02 — Projects</div>
+  <h2>Selected <em>Work</em></h2><br/><br/>
+  <div class="projects-list">
+
+    <div class="project-item">
+      <div class="proj-num">01</div>
+      <div>
+        <div class="proj-tags"><span class="proj-tag">Remote Sensing</span><span class="proj-tag">Urban</span></div>
+        <h3>Urbanization Assessment — Kathmandu Valley</h3>
+        <p class="proj-desc">Quantified urban expansion (2020–2025) using PCA, NDBI, and NDVI — tracking impervious surface growth and green space loss from satellite imagery.</p>
+        <div class="proj-techs"><span class="tech">PCA</span><span class="tech">NDBI</span><span class="tech">NDVI</span><span class="tech">Satellite Imagery</span></div>
+      </div>
+      <a class="proj-link" href="https://github.com/Everestgopal/Urbanization-assessment-using-Satellite-data" target="_blank">GitHub ↗</a>
+    </div>
+
+    <div class="project-item">
+      <div class="proj-num">02</div>
+      <div>
+        <div class="proj-tags"><span class="proj-tag">SAR</span><span class="proj-tag">Flood Mapping</span></div>
+        <h3>Flood Mapping — Peace-Athabasca Delta</h3>
+        <p class="proj-desc">Rapid flood extent mapping for the May 2020 Alberta flood using Sentinel-1 SAR data in ENVI SARscape to support emergency response.</p>
+        <div class="proj-techs"><span class="tech">Sentinel-1</span><span class="tech">SAR</span><span class="tech">ENVI SARscape</span></div>
+      </div>
+      <a class="proj-link" href="https://github.com/Everestgopal/Flood-mapping-using-Sentinel-1-" target="_blank">GitHub ↗</a>
+    </div>
+
+    <div class="project-item">
+      <div class="proj-num">03</div>
+      <div>
+        <div class="proj-tags"><span class="proj-tag">Machine Learning</span><span class="proj-tag">Air Quality</span></div>
+        <h3>PM2.5 Pollution Modeling — Kathmandu Valley</h3>
+        <p class="proj-desc">Compared ML and deep learning models for predicting fine particulate matter — bridging geospatial science and public health.</p>
+        <div class="proj-techs"><span class="tech">Python</span><span class="tech">Deep Learning</span><span class="tech">PM2.5</span></div>
+      </div>
+      <a class="proj-link" href="https://github.com/Everestgopal/Pollution-Modeling-Kathmandu-Valley" target="_blank">GitHub ↗</a>
+    </div>
+
+    <div class="project-item">
+      <div class="proj-num">04</div>
+      <div>
+        <div class="proj-tags"><span class="proj-tag">Geostatistics</span><span class="proj-tag">Hydrology</span></div>
+        <h3>Rainfall Interpolation — Lumbini Province</h3>
+        <p class="proj-desc">Kriging and IDW-based rainfall interpolation and seasonal analysis across Nepal's Lumbini Province for hydrological planning.</p>
+        <div class="proj-techs"><span class="tech">ArcGIS Pro</span><span class="tech">Kriging</span><span class="tech">IDW</span></div>
+      </div>
+      <a class="proj-link" href="https://github.com/Everestgopal/Rainfall-Interpolation-Lumbini-Nepal" target="_blank">GitHub ↗</a>
+    </div>
+
+    <div class="project-item">
+      <div class="proj-num">05</div>
+      <div>
+        <div class="proj-tags"><span class="proj-tag">ArcGIS</span><span class="proj-tag">Watershed</span></div>
+        <h3>Watershed Delineation — Robinson Creek</h3>
+        <p class="proj-desc">Full watershed delineation and stream network analysis from DEM processing — drainage basins, flow direction, and stream order maps.</p>
+        <div class="proj-techs"><span class="tech">ArcGIS Pro</span><span class="tech">DEM</span><span class="tech">Flow Analysis</span></div>
+      </div>
+      <a class="proj-link" href="https://github.com/Everestgopal/Watershed-Delineation-ArcGIS" target="_blank">GitHub ↗</a>
+    </div>
+
+    <div class="project-item">
+      <div class="proj-num">06</div>
+      <div>
+        <div class="proj-tags"><span class="proj-tag">Web GIS</span><span class="proj-tag">Urban Data</span></div>
+        <h3>St. Louis Crime Heat Map</h3>
+        <p class="proj-desc">Interactive JavaScript crime density visualization making spatial crime patterns accessible through a public web mapping interface.</p>
+        <div class="proj-techs"><span class="tech">JavaScript</span><span class="tech">Leaflet</span><span class="tech">Web GIS</span></div>
+      </div>
+      <a class="proj-link" href="https://github.com/Everestgopal/-Saint-Louis-crime-heat-map" target="_blank">GitHub ↗</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="eyebrow">03 — Experience</div>
+  <h2>Professional <em>History</em></h2><br/>
+  <div class="exp-grid">
+
+    <div class="exp-item">
+      <div class="exp-period">
+        <span class="exp-current">Current</span><br/>
+        Oct 2025 – Present<br/>San Francisco, CA
+      </div>
+      <div>
+        <div class="exp-role">GIS Technician / Surveyor</div>
+        <div class="exp-org">Sally Swanson Architects</div>
+        <div class="exp-desc">
+          <ul>
+            <li>Conduct ADA compliance surveys for Public Right-of-Way (PROW) and transportation infrastructure using LiDAR measurements and FileMaker mobile data collection workflows.</li>
+            <li>Process raw LiDAR data to generate precise 3D point clouds, then analyze and visualize the data in ArcGIS Pro to produce compliance reports and maps.</li>
+            <li>Perform spatial analysis, QA/QC, and accessibility assessments to support ADA compliance reporting and design recommendations.</li>
+            <li>Develop and manage enterprise-style geodatabases to store, organize, and visualize LiDAR-derived and field-collected spatial data.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-period">Aug 2024 – May 2025<br/>St. Louis, MO</div>
+      <div>
+        <div class="exp-role">Graduate Research Assistant</div>
+        <div class="exp-org">Bo's Fluvial Geomorphology Lab — Saint Louis University</div>
+        <div class="exp-desc">
+          <ul>
+            <li>Collected and georeferenced hydrological data using RTK GPS with high spatial accuracy.</li>
+            <li>Analyzed river morphology using SAR data and DEMs to support river dynamics study.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-period">Aug 2023 – Jul 2024<br/>St. Louis, MO</div>
+      <div>
+        <div class="exp-role">Graduate Research Assistant</div>
+        <div class="exp-org">GIESR Lab — Saint Louis University</div>
+        <div class="exp-desc">
+          <ul>
+            <li>Processed multispectral satellite imagery (Sentinel, Landsat) for time-series classification in Google Earth Engine.</li>
+            <li>Used IoT sensors (Raspberry Pi, Arduino) for plastic pollution tracking.</li>
+            <li>Integrated LiDAR point clouds to create high-resolution DEMs for terrain analysis.</li>
+            <li>Applied SQL for spatial queries and data management in PostGIS and ArcGIS geodatabases.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-period">Dec 2019 – Jul 2022<br/>Kathmandu, Nepal</div>
+      <div>
+        <div class="exp-role">Junior Researcher</div>
+        <div class="exp-org">NARERL — National Atmospheric Resource &amp; Environmental Research Laboratory</div>
+        <div class="exp-desc">
+          <ul>
+            <li>Utilized SODAR and RASS to monitor vertical wind and temperature profiles for air quality and boundary layer studies.</li>
+            <li>Integrated geospatial datasets for atmospheric modeling based on temperature, humidity, wind, and precipitation data.</li>
+            <li>Conducted climate vulnerability assessments using ArcMap.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="eyebrow">04 — Education</div>
+  <h2>Academic <em>Background</em></h2><br/>
+  <div class="edu-grid">
+
+    <div class="edu-item">
+      <div class="edu-year">May 2025<br/>GPA: 3.62</div>
+      <div>
+        <div class="edu-degree">Master of Science — Geographic Information Science</div>
+        <div class="edu-school">Saint Louis University · St. Louis, MO, USA</div>
+        <div class="courses-label">Courses Taken</div>
+        <div class="tags">
+          <span class="tag">Introduction to GIS</span>
+          <span class="tag">Introduction to Remote Sensing</span>
+          <span class="tag">Programming for GIS &amp; Remote Sensing</span>
+          <span class="tag">Geospatial Data Management</span>
+          <span class="tag">Digital Cartography &amp; Geovisualization</span>
+          <span class="tag">Advanced Programming for GIS &amp; RS</span>
+          <span class="tag">Machine Learning for GIS &amp; Remote Sensing</span>
+          <span class="tag">Geospatial Analytics</span>
+          <span class="tag">Digital Image Processing</span>
+          <span class="tag">Microwave Remote Sensing</span>
+          <span class="tag">Dissertation Research</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="edu-item">
+      <div class="edu-year">Dec 2019</div>
+      <div>
+        <div class="edu-degree">Master of Science — Physics</div>
+        <div class="edu-school">Tribhuvan University · Kathmandu, Nepal</div>
+        <div class="courses-label">Courses Taken</div>
+        <div class="tags">
+          <span class="tag">Quantum Mechanics</span>
+          <span class="tag">Atmospheric Physics</span>
+          <span class="tag">Electrodynamics</span>
+          <span class="tag">Mathematical Physics</span>
+          <span class="tag">Statistical Physics</span>
+          <span class="tag">Wave Propagation</span>
+          <span class="tag">Signal Processing</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="edu-item">
+      <div class="edu-year">Jul 2017</div>
+      <div>
+        <div class="edu-degree">Bachelor of Science — Physics</div>
+        <div class="edu-school">Tribhuvan University · Kathmandu, Nepal</div>
+        <div class="courses-label">Major Subjects</div>
+        <div class="tags">
+          <span class="tag">Physics</span>
+          <span class="tag">Statistics</span>
+          <span class="tag">Mathematics</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PUBLICATION -->
+<section id="publication">
+  <div class="eyebrow">05 — Publication</div>
+  <h2>Peer-Reviewed <em>Research</em></h2><br/>
+  <div class="pub-box">
+    <div class="pub-tag">Journal Article · 2022</div>
+    <div class="pub-title">Post Monsoon Season Spatial Distribution of Groundwater Depth over the Low-Lands of Sunsari District of Eastern Nepal</div>
+    <div class="pub-authors">Ghimire, D., Dhakal, D. R., <strong style="color:#e8e5df">Bhusal, G.</strong>, Khadka, A. K., Shrestha, S., &amp; Regmi, R. P. (2022).</div>
+    <div class="pub-journal">Journal of Nepal Physical Society, 8(3), 32–38</div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog">
+  <div class="eyebrow">06 — Writing</div>
+  <h2>Thoughts &amp; <em>Articles</em></h2><br/><br/>
+  <div class="blog-grid">
+    <div class="blog-card">
+      <div class="blog-date">Coming Soon</div>
+      <div class="blog-title">How SAR Satellites See Through Clouds to Map Floods</div>
+      <p class="blog-excerpt">A practical breakdown of Synthetic Aperture Radar and how I used Sentinel-1 to map the Peace-Athabasca Delta flood in real time.</p>
+      <a href="#" class="blog-read">Read Soon →</a>
+    </div>
+    <div class="blog-card">
+      <div class="blog-date">Coming Soon</div>
+      <div class="blog-title">NDVI vs NDBI: Measuring Urban Growth from Space</div>
+      <p class="blog-excerpt">How spectral indices from multispectral satellites quantify the trade-off between green space and impervious surface in rapidly urbanizing cities.</p>
+      <a href="#" class="blog-read">Read Soon →</a>
+    </div>
+    <div class="blog-card">
+      <div class="blog-date">Coming Soon</div>
+      <div class="blog-title">ML for Air Quality: Lessons from Kathmandu</div>
+      <p class="blog-excerpt">Comparing classical ML against deep learning for PM2.5 prediction in one of South Asia's most polluted urban valleys.</p>
+      <a href="#" class="blog-read">Read Soon →</a>
+    </div>
+  </div>
+</section>
+
+<!-- REFERENCES -->
+<section id="references">
+  <div class="eyebrow">07 — References</div>
+  <h2>Professional <em>References</em></h2><br/><br/>
+  <div class="ref-grid">
+
+    <div class="ref-card">
+      <div class="ref-name">M. Deniz Turan, PhD</div>
+      <div class="ref-title">GIS Director</div>
+      <div class="ref-org">Swan Arch (Sally Swanson Architects)</div>
+      <div class="ref-contacts">
+        <a class="ref-contact" href="mailto:dturan@swanarch.com">✉ dturan@swanarch.com</a>
+        <a class="ref-contact" href="mailto:denizkustuturan@gmail.com">✉ denizkustuturan@gmail.com</a>
+        <span class="ref-contact">📞 800 533 8771</span>
+        <span class="ref-contact">📞 Direct: 415 445 3045 ext. 101</span>
+      </div>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-name">Dr. Bo Wang</div>
+      <div class="ref-title">Assistant Professor</div>
+      <div class="ref-org">Dept. of Earth, Environmental &amp; Geospatial Science · Saint Louis University</div>
+      <div class="ref-contacts">
+        <a class="ref-contact" href="mailto:bo.wang.1@slu.edu">✉ bo.wang.1@slu.edu</a>
+        <span class="ref-contact">📞 (225) 247-8127</span>
+      </div>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-name">Dr. Orhun Aydin</div>
+      <div class="ref-title">Assistant Professor</div>
+      <div class="ref-org">Dept. of Earth, Environmental &amp; Geospatial Science · Saint Louis University</div>
+      <div class="ref-contacts">
+        <a class="ref-contact" href="mailto:orhun.aydin@slu.edu">✉ orhun.aydin@slu.edu</a>
+        <span class="ref-contact">📞 (314) 977-3131</span>
+      </div>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-name">Dr. Zach Phillips</div>
+      <div class="ref-title">Ecohydrologist</div>
+      <div class="ref-org">cbec eco engineering · West Sacramento, CA</div>
+      <div class="ref-contacts">
+        <a class="ref-contact" href="mailto:zphillips6627@gmail.com">✉ zphillips6627@gmail.com</a>
+        <span class="ref-contact">📞 (513) 280-1349</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="eyebrow">08 — Contact</div>
+  <div class="contact-grid">
+    <div>
+      <h2>Let's <em>Connect</em></h2><br/>
+      <p>Open to research collaborations, GIS consulting, and opportunities in environmental data science and geospatial analytics.</p>
+      <div class="soc-links">
+        <a class="soc-link" href="mailto:bhusalgopal89@gmail.com">
+          <span>✉ bhusalgopal89@gmail.com</span><span>↗</span>
+        </a>
+        <a class="soc-link" href="https://github.com/Everestgopal" target="_blank">
+          <span>⌨ github.com/Everestgopal</span><span>↗</span>
+        </a>
+        <a class="soc-link" href="https://linkedin.com/in/gopalbhusal89" target="_blank">
+          <span>🔗 linkedin.com/in/gopalbhusal89</span><span>↗</span>
+        </a>
+        <a class="soc-link" href="tel:3143331694">
+          <span>📞 (314) 333-1694</span><span>↗</span>
+        </a>
+      </div>
+    </div>
+    <div>
+      <div class="contact-form-wrap">
+        <form id="contactForm">
+          <div class="form-row">
+            <label class="form-label">Name</label>
+            <input class="form-input" type="text" placeholder="Your name" required/>
+          </div>
+          <div class="form-row">
+            <label class="form-label">Email</label>
+            <input class="form-input" type="email" placeholder="your@email.com" required/>
+          </div>
+          <div class="form-row">
+            <label class="form-label">Message</label>
+            <textarea class="form-textarea" placeholder="Tell me about your project or opportunity…" required></textarea>
+          </div>
+          <button class="btn-send" type="submit">Send Message</button>
+        </form>
+        <div class="form-success" id="formSuccess">✓ Message sent! I'll get back to you soon.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Gopal Bhusal · San Francisco, CA</p>
+  <div>
+    <a href="https://github.com/Everestgopal" target="_blank">GitHub</a>
+    <a href="https://linkedin.com/in/gopalbhusal89" target="_blank">LinkedIn</a>
+    <a href="#hero">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>
+document.getElementById('hamburger').addEventListener('click', function() {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+document.querySelectorAll('#navLinks a').forEach(function(a) {
+  a.addEventListener('click', function() {
+    document.getElementById('navLinks').classList.remove('open');
+  });
+});
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  this.style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+});
+</script>
+</body>
+</html>
